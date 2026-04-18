@@ -36,7 +36,8 @@ export const Route = createFileRoute("/property/$id")({
 });
 
 function PropertyDetailPage() {
-  const { property } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { property: import("@/data/properties").Property };
+  const property = data.property;
   const fav = useFavorites((s) => s.ids.includes(property.id));
   const toggleFav = useFavorites((s) => s.toggle);
   const [lightbox, setLightbox] = useState<number | null>(null);
