@@ -10,6 +10,7 @@ const LINKS = [
   { to: "/listings", label: "Rent", search: { listingType: "rent" as const } },
   { to: "/listings", label: "Land", search: { type: "land" as const } },
   { to: "/map", label: "Map Search" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function Navbar() {

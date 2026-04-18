@@ -41,7 +41,7 @@ export function Footer() {
           </div>
 
           <FooterCol title="Discover" links={[["Buy", "/listings"], ["Rent", "/listings"], ["Land", "/listings"], ["Map Search", "/map"]]} />
-          <FooterCol title="Company" links={[["About", "/"], ["Agents", "/"], ["Press", "/"], ["Careers", "/"]]} />
+          <FooterCol title="Company" links={[["About", "/"], ["Agents", "/contact"], ["Press", "/"], ["Contact", "/contact"]]} />
           <FooterCol title="Legal" links={[["Privacy", "/"], ["Terms", "/"], ["Cookies", "/"], ["Sitemap", "/"]]} />
         </div>
 
