@@ -46,7 +46,8 @@ export function LiveMap({ properties }: Props) {
 
     const geocoder = new MapboxGeocoder({
       accessToken: MAPBOX_TOKEN,
-      mapboxgl: mapboxgl as unknown as typeof MapboxGeocoder.prototype.mapboxgl,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      mapboxgl: mapboxgl as any,
       marker: false,
       placeholder: "Search any address…",
       collapsed: false,
@@ -143,7 +144,8 @@ export function LiveMap({ properties }: Props) {
       // Pin click
       map.on("click", "point", (e) => {
         const f = e.features?.[0];
-        const id = f?.properties?.id as string | undefined;
+        if (!f) return;
+        const id = f.properties?.id as string | undefined;
         if (!id) return;
         const found = properties.find((p) => p.id === id) || null;
         if (!found) return;
