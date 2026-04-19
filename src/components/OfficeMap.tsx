@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { hasMapboxToken, MAPBOX_TOKEN } from "@/lib/mapbox";
+import { MapPin } from "lucide-react";
 
 interface Props {
   lat: number;
@@ -8,50 +7,31 @@ interface Props {
   label?: string;
 }
 
-/** A reusable, dark-styled mini map with a glowing gold marker. */
+/** A styled mini map using Google Maps Embed (no API billing required). */
 export function OfficeMap({ lat, lng, zoom = 14, label }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+  // Use Google Maps Embed API — works without billing on the JS API
+  const q = label ? encodeURIComponent(label) : `${lat},${lng}`;
+  const embedUrl = `https://www.google.com/maps?q=${q}&z=${zoom}&output=embed`;
 
-  useEffect(() => {
-    if (!ref.current || !hasMapboxToken()) return;
-    let cancelled = false;
-    let mapInstance: import("mapbox-gl").Map | null = null;
-
-    (async () => {
-      const mapboxgl = (await import("mapbox-gl")).default;
-      if (cancelled || !ref.current) return;
-      mapboxgl.accessToken = MAPBOX_TOKEN!;
-      mapInstance = new mapboxgl.Map({
-        container: ref.current,
-        style: "mapbox://styles/mapbox/dark-v11",
-        center: [lng, lat],
-        zoom,
-        attributionControl: true,
-      });
-      mapInstance.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
-
-      const el = document.createElement("div");
-      el.style.cssText = "width:24px;height:24px;border-radius:50%;background:#C9A84C;border:3px solid #0A0A0F;box-shadow:0 0 24px rgba(201,168,76,0.7);cursor:pointer;";
-      const marker = new mapboxgl.Marker(el).setLngLat([lng, lat]).addTo(mapInstance);
-      if (label) {
-        marker.setPopup(new mapboxgl.Popup({ offset: 18, closeButton: false }).setHTML(
-          `<div style="font-family:DM Sans,sans-serif;background:rgba(10,10,15,0.92);color:#F5F0E8;padding:8px 12px;border-radius:8px;border:1px solid rgba(201,168,76,0.4);font-size:12px;">${label}</div>`,
-        ));
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-      mapInstance?.remove();
-    };
-  }, [lat, lng, zoom, label]);
-
-  if (!hasMapboxToken()) {
-    return (
-      <div className="flex h-full items-center justify-center bg-navy/30 text-center text-xs text-muted-foreground">
-        Add VITE_MAPBOX_TOKEN to view the office map
-      </div>
-    );
-  }
-  return <div ref={ref} className="h-full w-full" />;
+  return (
+    <div className="relative h-full w-full overflow-hidden bg-[#0a1a0a]">
+      <iframe
+        src={embedUrl}
+        className="h-full w-full border-0 grayscale-[30%] contrast-[1.1]"
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title={label || "Map"}
+        style={{ filter: "saturate(0.85) brightness(1.02)" }}
+      />
+      {/* Overlay with brand accent */}
+      <div className="pointer-events-none absolute inset-0 border border-[#1B6B3A]/10" />
+      {label && (
+        <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full border border-[#1B6B3A]/20 bg-white/95 px-3 py-1.5 text-xs font-medium text-[#1C2024] shadow-lg backdrop-blur">
+          <MapPin className="h-3.5 w-3.5 text-[#1B6B3A]" />
+          {label}
+        </div>
+      )}
+    </div>
+  );
 }

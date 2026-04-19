@@ -43,8 +43,8 @@ export function ContactForm() {
   const messageLen = watch("message")?.length ?? 0;
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-border bg-card/40 p-8 shadow-luxe md:p-12 grain">
-      <div className="absolute inset-0 bg-mesh opacity-50" />
+    <div className="relative overflow-hidden rounded-3xl border border-border bg-white p-8 shadow-luxe md:p-12">
+      <div className="absolute inset-0 bg-mesh opacity-40" />
 
       <AnimatePresence mode="wait">
         {sent ? (
@@ -60,12 +60,12 @@ export function ContactForm() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
-              className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-gold"
+              className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-gold"
             >
               <Check className="h-9 w-9" strokeWidth={2.5} />
             </motion.div>
             <h3 className="font-display text-4xl text-cream md:text-5xl">Thank you</h3>
-            <p className="mt-4 max-w-md text-cream/70">
+            <p className="mt-4 max-w-md text-muted-foreground">
               Your enquiry has been received. A senior advisor will be in touch within one business day.
             </p>
             <button
@@ -104,12 +104,12 @@ export function ContactForm() {
               <Field id="enquiry" label="Enquiry type" error={errors.enquiry?.message} touched={!!touchedFields.enquiry}>
                 <div className="relative">
                   <select id="enquiry" {...register("enquiry")} defaultValue="" className={`${inputCls(!!errors.enquiry)} appearance-none pr-10`}>
-                    <option value="" disabled className="bg-charcoal">Select an option</option>
+                    <option value="" disabled className="bg-white">Select an option</option>
                     {ENQUIRY_TYPES.map((t) => (
-                      <option key={t} value={t} className="bg-charcoal">{t}</option>
+                      <option key={t} value={t} className="bg-white">{t}</option>
                     ))}
                   </select>
-                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-cream/60">▾</span>
+                  <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-cream/40">▾</span>
                 </div>
               </Field>
               <Field id="budget" label="Budget (optional)" error={errors.budget?.message} touched={!!touchedFields.budget} className="md:col-span-2">
@@ -133,7 +133,7 @@ export function ContactForm() {
             <label className="flex items-start gap-3 text-xs text-cream/70">
               <input type="checkbox" {...register("consent")} className="mt-0.5 h-4 w-4 accent-[var(--gold)]" />
               <span>
-                I consent to LUXESTATE contacting me regarding my enquiry. I have read the{" "}
+                I consent to SHAMS EL MEDINA contacting me regarding my enquiry. I have read the{" "}
                 <a className="text-gold underline-offset-4 hover:underline" href="#">privacy notice</a>.
               </span>
             </label>
@@ -146,7 +146,7 @@ export function ContactForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-shimmer relative inline-flex w-full items-center justify-center gap-3 rounded-full bg-gradient-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-charcoal shadow-gold transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
+              className="btn-shimmer relative inline-flex w-full items-center justify-center gap-3 rounded-full bg-gradient-gold px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white shadow-gold transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
             >
               <span className="relative z-10">{isSubmitting ? "Sending…" : "Send enquiry"}</span>
               {!isSubmitting && <Send className="relative z-10 h-4 w-4" />}
@@ -165,7 +165,7 @@ export function ContactForm() {
 }
 
 function inputCls(hasError: boolean) {
-  return `w-full rounded-xl border bg-charcoal/40 px-4 py-3 text-sm text-cream placeholder:text-muted-foreground transition-colors focus:outline-none focus:ring-1 ${
+  return `w-full rounded-xl border bg-[#f5f9f5] px-4 py-3 text-sm text-cream placeholder:text-muted-foreground transition-colors focus:outline-none focus:ring-1 ${
     hasError
       ? "border-destructive/70 focus:border-destructive focus:ring-destructive/40"
       : "border-border focus:border-gold focus:ring-gold/40"

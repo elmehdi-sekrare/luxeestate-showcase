@@ -80,11 +80,11 @@ export function LiveMap({ properties }: Props) {
         paint: {
           "circle-color": [
             "step", ["get", "point_count"],
-            "rgba(201,168,76,0.25)", 5,
-            "rgba(201,168,76,0.4)", 15,
-            "rgba(201,168,76,0.6)",
+            "rgba(27,107,58,0.25)", 5,
+            "rgba(27,107,58,0.4)", 15,
+            "rgba(27,107,58,0.6)",
           ],
-          "circle-stroke-color": "#C9A84C",
+          "circle-stroke-color": "#1B6B3A",
           "circle-stroke-width": 2,
           "circle-radius": ["step", ["get", "point_count"], 22, 5, 28, 15, 36],
         },
@@ -99,7 +99,7 @@ export function LiveMap({ properties }: Props) {
           "text-font": ["DIN Pro Bold", "Arial Unicode MS Bold"],
           "text-size": 13,
         },
-        paint: { "text-color": "#0A0A0F" },
+        paint: { "text-color": "#FFFFFF" },
       });
 
       // Unclustered points
@@ -109,7 +109,7 @@ export function LiveMap({ properties }: Props) {
         source: "props",
         filter: ["!", ["has", "point_count"]],
         paint: {
-          "circle-color": "#C9A84C",
+          "circle-color": "#1B6B3A",
           "circle-opacity": 0.15,
           "circle-radius": 18,
           "circle-blur": 0.6,
@@ -121,9 +121,9 @@ export function LiveMap({ properties }: Props) {
         source: "props",
         filter: ["!", ["has", "point_count"]],
         paint: {
-          "circle-color": "#C9A84C",
+          "circle-color": "#1B6B3A",
           "circle-radius": 8,
-          "circle-stroke-color": "#0A0A0F",
+          "circle-stroke-color": "#FFFFFF",
           "circle-stroke-width": 2,
         },
       });

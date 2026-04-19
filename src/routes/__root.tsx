@@ -3,6 +3,8 @@ import appCss from "../styles.css?url";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { LuxeCursor } from "@/components/LuxeCursor";
+import { ChatWidget } from "@/components/ChatWidget";
+import { useLang } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -28,11 +30,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LUXESTATE — A private collection of the world's finest properties" },
+      { title: "SHAMS EL MEDINA — A private collection of the world's finest properties" },
       { name: "description", content: "An ultra-luxury real estate marketplace featuring private estates, villas, penthouses and exceptional residences across the globe." },
-      { name: "author", content: "LUXESTATE" },
+      { name: "author", content: "SHAMS EL MEDINA" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "LUXESTATE — Find your dream property" },
+      { property: "og:title", content: "SHAMS EL MEDINA — Find your dream property" },
       { property: "og:description", content: "Discover the world's most exceptional residences." },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -45,7 +47,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="fr" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -58,6 +60,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const lang = useLang((s) => s.lang);
+
+  // Update html lang + dir when language changes
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  }
+
   return (
     <>
       <LuxeCursor />
@@ -66,6 +76,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
+      <ChatWidget />
     </>
   );
 }

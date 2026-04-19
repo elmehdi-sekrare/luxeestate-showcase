@@ -1,0 +1,12 @@
+/* BACKUP — Original Gold/Charcoal palette. To restore, copy this file back to styles.css */
+
+/* Brand palette in oklch */
+/* --charcoal: oklch(0.12 0.008 270);   #0A0A0F */
+/* --navy: oklch(0.2 0.03 250);         #0D1B2A */
+/* --gold: oklch(0.76 0.12 85);         #C9A84C */
+/* --gold-foreground: oklch(0.12 0.008 270); */
+/* --cream: oklch(0.95 0.012 80);       #F5F0E8 */
+/* --gradient-gold: linear-gradient(135deg, oklch(0.82 0.13 88), oklch(0.68 0.11 75)); */
+/* --shadow-gold: 0 20px 60px -20px oklch(0.76 0.12 85 / 0.4); */
+/* gold-text-gradient: linear-gradient(135deg, oklch(0.88 0.1 88), oklch(0.7 0.12 78)); */
+/* selection: oklch(0.76 0.12 85 / 0.4); */

@@ -16,7 +16,7 @@ export function HeroScene() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0a0a0f, 0.05);
+    scene.fog = new THREE.FogExp2(0xFFFFFF, 0.05);
 
     const camera = new THREE.PerspectiveCamera(45, mount.clientWidth / mount.clientHeight, 0.1, 1000);
     camera.position.set(7, 5, 10);
@@ -30,8 +30,8 @@ export function HeroScene() {
 
     // === Build a stylized luxury house out of wireframes ===
     const group = new THREE.Group();
-    const goldMat = new THREE.LineBasicMaterial({ color: 0xc9a84c, transparent: true, opacity: 0.85 });
-    const cream = new THREE.LineBasicMaterial({ color: 0xf5f0e8, transparent: true, opacity: 0.35 });
+    const goldMat = new THREE.LineBasicMaterial({ color: 0x1B6B3A, transparent: true, opacity: 0.85 });
+    const cream = new THREE.LineBasicMaterial({ color: 0xBBC5BD, transparent: true, opacity: 0.3 });
 
     // Base box
     const baseGeom = new THREE.BoxGeometry(6, 2.4, 4);
@@ -60,7 +60,7 @@ export function HeroScene() {
     // Pool water plane (slightly transparent)
     const water = new THREE.Mesh(
       new THREE.PlaneGeometry(3.8, 1.8),
-      new THREE.MeshBasicMaterial({ color: 0xc9a84c, transparent: true, opacity: 0.08, side: THREE.DoubleSide }),
+      new THREE.MeshBasicMaterial({ color: 0x1B6B3A, transparent: true, opacity: 0.08, side: THREE.DoubleSide }),
     );
     water.rotation.x = -Math.PI / 2;
     water.position.set(0, 0.05, 3.5);
@@ -88,11 +88,18 @@ export function HeroScene() {
     });
 
     // Ground plane (subtle gold grid)
-    const grid = new THREE.GridHelper(40, 40, 0xc9a84c, 0xc9a84c);
-    (grid.material as THREE.Material).opacity = 0.06;
+    const grid = new THREE.GridHelper(40, 40, 0x4CAF50, 0x388E3C);
+    (grid.material as THREE.Material).opacity = 0.4;
     (grid.material as THREE.Material).transparent = true;
     grid.position.y = -0.01;
     scene.add(grid);
+
+    // Secondary finer grid for premium depth
+    const grid2 = new THREE.GridHelper(40, 120, 0x66BB6A, 0x66BB6A);
+    (grid2.material as THREE.Material).opacity = 0.12;
+    (grid2.material as THREE.Material).transparent = true;
+    grid2.position.y = -0.02;
+    scene.add(grid2);
 
     scene.add(group);
 
@@ -108,7 +115,7 @@ export function HeroScene() {
     pGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     const particles = new THREE.Points(
       pGeom,
-      new THREE.PointsMaterial({ color: 0xc9a84c, size: 0.06, transparent: true, opacity: 0.6 }),
+      new THREE.PointsMaterial({ color: 0x1B6B3A, size: 0.06, transparent: true, opacity: 0.6 }),
     );
     scene.add(particles);
 

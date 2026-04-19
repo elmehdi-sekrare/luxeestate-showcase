@@ -38,11 +38,11 @@ export function AgentFlipCard({ agent, index = 0 }: Props) {
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#051205]/90 via-[#051205]/30 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-6">
             <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">{agent.title}</p>
-            <h3 className="font-display text-3xl text-cream">{agent.name}</h3>
-            <p className="mt-1 flex items-center gap-1.5 text-xs text-cream/70">
+            <h3 className="font-display text-3xl text-white">{agent.name}</h3>
+            <p className="mt-1 flex items-center gap-1.5 text-xs text-white/70">
               <MapPin className="h-3 w-3 text-gold" />
               {agent.city}
             </p>
